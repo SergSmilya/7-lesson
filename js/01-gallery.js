@@ -37,7 +37,16 @@ function onPictureClick(event) {
 
   const instance = basicLightbox
     .create(`<img src=${event.target.dataset.source}>`)
-    .show();
+    .show(() => {
+      window.addEventListener("keydown", onEscapePress);
+    });
+
+  function onEscapePress(evt) {
+    console.log(evt);
+    if (evt.target.code === "Escape") {
+      close();
+    }
+  }
 }
 
 // Додай закриття модального вікна після натискання клавіші Escape. Зроби так, щоб прослуховування клавіатури було тільки доти, доки відкрите модальне вікно. Бібліотека basicLightbox містить метод для програмного закриття модального вікна.
